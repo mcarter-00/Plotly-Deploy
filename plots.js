@@ -9,6 +9,9 @@ function init() {
     sampleNames.forEach((sample) => {
       selector.append('option').text(sample).property('value', sample);
     });
+    var initialSample = sampleNames[0];
+    buildMetadata(initialSample);
+    buildCharts(initialSample);
   });
 }
 
@@ -58,10 +61,7 @@ function buildCharts(sample) {
     );
     // data for gauge
     var metData = metadata.filter((obj) => obj.id == sample)[0];
-    console.log(metData);
     var washFreq = metData.wfreq;
-    console.log(washFreq);
-
     // data for bar chart
     var data1 = [
       {
@@ -93,7 +93,7 @@ function buildCharts(sample) {
         // domain: washFreq,
         value: washFreq,
         title: {
-          text: 'Belly Button Washing Frequency (Scrubs per Week)',
+          text: 'Belly Button Washing Frequency<br>Scrubs per Week',
         },
         type: 'indicator',
         mode: 'gauge+number',
@@ -107,6 +107,9 @@ function buildCharts(sample) {
       margin: {
         t: 40,
         l: 150,
+      },
+      title: {
+        text: 'Top 10 Bacterial Species (OTUs)',
       },
     };
     // layout for bubble chart
